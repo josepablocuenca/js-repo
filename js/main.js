@@ -28,14 +28,15 @@ let compra = confirm("Quieres comprar algo? ")
 if (compra == true){
   let genero = prompt("Vinos - Cervezas - Whiskies")
   while(compra){
+    //console.log(genero)
     if(genero == "Vinos"){
-        let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n A- Malbec\n B- Cabernet\n C- Suavignon Blanc")
+        let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n A- Malbec\n B- Cabernet\n C- Suavignon Blanc \n Indique el indice que quiere seleccionar")
 
         switch(familiaProducto){
 
           case "A": 
             
-            producto = prompt( "Excelente puedes elegir: \n 1- Pyros $9.000\n 2- Elefante $8.000\n 3- Calia $5.000")
+            producto = prompt( "Excelente puedes elegir: \n 1- Pyros $9.000\n 2- Elefante $8.000\n 3- Calia $5.000 \n Indique el indice que quiere seleccionar")
             switch(producto){
 
               case "1":
@@ -77,7 +78,7 @@ if (compra == true){
           break
           case "B":
 
-            producto = prompt( "Excelente puedes elegir: \n 1- Enemigo $9.000\n 2- Violinista $8.000\n 3- LasMoras $5.000")
+            producto = prompt( "Excelente puedes elegir: \n 1- Enemigo $9.000\n 2- Violinista $8.000\n 3- LasMoras $5.000 \n Indique el indice que quiere seleccionar")
             switch(producto){
 
               case "1":
@@ -119,7 +120,7 @@ if (compra == true){
 
           break
           case "C":
-            producto = prompt( "Excelente puedes elegir: \n 1- Portillo $7.000\n 2- Aguma $6.000\n 3- LasMoras $5.000")
+            producto = prompt( "Excelente puedes elegir: \n 1- Portillo $7.000\n 2- Aguma $6.000\n 3- LasMoras $5.000 \n Indique el indice que quiere seleccionar")
             switch(producto){
 
               case "1":
@@ -166,13 +167,13 @@ if (compra == true){
         }  
     }
     else if (genero == "Cervezas"){
-      let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n A- Rubia\n B- Roja\n C- Negra")
+      let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n A- Rubia\n B- Roja\n C- Negra \n Indique el indice que quiere seleccionar")
 
       switch(familiaProducto){
 
         case "A": 
             
-          producto = prompt( "Excelente puedes elegir: \n 1- Corona $3.000\n 2- Heineken $2.000\n 3- Budweiser $1.000")
+          producto = prompt( "Excelente puedes elegir: \n 1- Corona $3.000\n 2- Heineken $2.000\n 3- Budweiser $1.000 \n Indique el indice que quiere seleccionar")
           switch(producto){
 
               case "1":
@@ -213,7 +214,7 @@ if (compra == true){
           break
           case "B":
 
-            producto = prompt( "Excelente puedes elegir: \n 1- Imperial $3.000\n 2- Andes $2.000\n 3- Quilmes $1.000")
+            producto = prompt( "Excelente puedes elegir: \n 1- Imperial $3.000\n 2- Andes $2.000\n 3- Quilmes $1.000 \n Indique el indice que quiere seleccionar")
             switch(producto){
 
               case "1":
@@ -255,7 +256,7 @@ if (compra == true){
 
           break
           case "C":
-            producto = prompt( "Excelente puedes elegir: \n 1- Imprerial $3.500\n 2- Andes $2.000\n 3- Quilmes $1.500")
+            producto = prompt( "Excelente puedes elegir: \n 1- Imprerial $3.500\n 2- Andes $2.000\n 3- Quilmes $1.500 \n Indique el indice que quiere seleccionar")
             switch(producto){
 
               case "1":
@@ -303,7 +304,7 @@ if (compra == true){
         }  
     }
     else if(genero == "Whiskies"){
-      let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n 1- Jim Bean  $12.000\n 2- Jack Daniels  $9.000\n 3- Johnnie Walker  $23.000\n 4- Jameson  $15.000")
+      let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n 1- Jim Bean  $12.000\n 2- Jack Daniels  $9.000\n 3- Johnnie Walker  $23.000\n 4- Jameson  $15.000 \n Indique el indice que quiere seleccionar")
 
       switch(familiaProducto){
 
@@ -360,6 +361,9 @@ if (compra == true){
           alert("La opción de vinos elegida no es correcta!")     
         }  
     }
+    else if (genero == null){
+      alert("No has seleccionado ninguna opción")
+    }
     else{
         alert("La opción elegida no es correcta!")
       
@@ -369,6 +373,7 @@ if (compra == true){
       genero = prompt("Vinos - Cervezas - Whiskies")
     }
     else{  
+      if(carrito.length != 0){
         alert("Su carrito: \n" +carrito.join("\n")) 
         sumaSaldo()
         alert("Su saldo a pagar es de: " +saldo)
@@ -429,6 +434,12 @@ if (compra == true){
           }  
         }  
         alert("Gracias vuelva prontos!")
+      }  
+      else{
+        alert("Gracias vuelva prontos!")
+        compra = false
+      }
+  
     }
 
   }
