@@ -1,451 +1,417 @@
+//defino variables
+const articulosVinos = document.getElementById("listaVinos")
+const articulosCervezas = document.getElementById("listaCervezas")
+const articulosWhiskies = document.getElementById("listaWhiskies")
+const articulosCarrito = document.getElementById("listaCarrito")
+const saldoCarrito = document.getElementById("saldoCarrito")
 
-//defino variables y funciones
-let producto
-const carrito = []
-const precios = []
-const carritoAux = []
-const carritoFinal = []
-let saldo
-let cantidad
-let elementosRemovidos
+const arreglo = []
+const carritoCompra = []
+let saldo = 0
+let jsonCarrito
 
-function sumaSaldo(){  
-  saldo = 0
-  for (let precio of precios) {
-    console.log("Precio item " +precio)
-	  saldo += precio
-    console.log("Saldo sumado: " +saldo)
+class Vinos{
+  constructor( tipo, marca, variedad, precio, imagen){
+    this.tipo = tipo,
+    this.marca = marca,
+    this.variedad = variedad,
+    this.precio = precio,
+    this.imagen = imagen
   }
-
-  console.log(saldo);
 }
+class Cerveza{
+  constructor( tipo, marca, variedad, precio, imagen){
+    this.tipo = tipo,
+    this.marca = marca,
+    this.variedad = variedad,
+    this.precio = precio,
+    this.imagen = imagen
+  }  
+}
+class Whiskie{
+  constructor(tipo, marca, variedad, precio, imagen){
+    this.tipo = tipo,
+    this.marca = marca,
+    this.variedad = variedad,
+    this.precio = precio,
+    this.imagen = imagen
+  }  
+}
+//defino algunos objetos para cargar mis productos
+Vinos = [
+  new Vinos("Vino", "Pyros", "Malbec","9000", "/img/pyrosmalbec.jpeg"),
+  new Vinos("Vino", "Violinista", "Malbec", "7000", "/img/violinistamalbec.jpeg"),
+  new Vinos("Vino", "Aguma", "Malbec", "8000", "/img/agumamalbec.jpeg"),
+  new Vinos("Vino", "Colon", "Syrah", "4000", "/img/colonsyrah.jpeg"),
+  new Vinos("Vino", "Elefante", "Cabernet", "8000", "/img/elefantecabernet.jpeg"),
+]
+Cerveza =[
+    new Cerveza("Cerveza", "Quilmes", "Rubia", "1000", "/img/quilmesrubia.jpeg"),
+    new Cerveza("Cerveza", "Corona", "Rubia", "3000", "/img/coronarubia.jpeg"),
+    new Cerveza("Cerveza", "Andes", "Roja", "4000", "/img/andesroja.jpeg"),
+    new Cerveza("Cerveza", "Imperial", "Roja", "3000", "/img/imperialroja.jpeg"),
+    new Cerveza("Cerveza", "Imperial", "IPA", "3500", "/img/imperialipa.jpeg"),
+]
+Whiskie =[
+  new Whiskie("Whiskie", "JimBeam", "Whiskie", "15000", "/img/jimbeam.jpeg"),
+  new Whiskie("Whiskie", "Jack Daniels", "Whiskie", "12000", "/img/jackdaniels.jpeg"),
+  new Whiskie("Whiskie", "Jameson", "Whiskie", "17000", "/img/jameson.jpeg"),
+  new Whiskie("Whiskie", "Jony Walker", "Whiskie", "20000", "/img/jonywalker.jpeg"),
+]
 
-//Sección compra carrito
-alert("Bienvenidos a nuestro eshop de bebidas!")
-let compra = confirm("Quieres comprar algo? ")
+//eventos de los botones 
+
+//en cada click de los botones Vinos, Cervezas y Whiskies se muestran los articulos por pantalla
+
+const mostrarVinos = (vinos)=>{ 
+  // vacio todos para que no muestre repetidos en el html
+  articulosCervezas.innerHTML = ""
+  articulosWhiskies.innerHTML = "" 
+  articulosVinos.innerHTML = ""
+  articulosCarrito.innerHTML = ""
 
 
-if (compra == true){
-  let genero = prompt("Vinos - Cervezas - Whiskies")
-  while(compra){
-    //console.log(genero)
-    if(genero == "Vinos"){
-        let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n A- Malbec\n B- Cabernet\n C- Suavignon Blanc \n Indique el indice que quiere seleccionar")
-
-        switch(familiaProducto){
-
-          case "A": 
-            
-            producto = prompt( "Excelente puedes elegir: \n 1- Pyros $9.000\n 2- Elefante $8.000\n 3- Calia $5.000 \n Indique el indice que quiere seleccionar")
-            switch(producto){
-
-              case "1":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Malbec Pyros"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Malbec Pyros")
-                  precios.push(9000)
-                  
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "2":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Malbec Elefante"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Malbec Elefante")
-                  precios.push(8000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "3":
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Malbec Calia"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Malbec Calia")
-                  precios.push(5000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break  
-            }
-          break
-          case "B":
-
-            producto = prompt( "Excelente puedes elegir: \n 1- Enemigo $9.000\n 2- Violinista $8.000\n 3- LasMoras $5.000 \n Indique el indice que quiere seleccionar")
-            switch(producto){
-
-              case "1":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Cabernet Enemigo"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Cabernet Enemigo")
-                  precios.push(9000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "2":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Cabernet Violinista"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Cabernet Violinista")
-                  precios.push(8000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "3":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Cabernet LasMoras"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Cabernet LasMoras")
-                  precios.push(5000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break  
-            }
-
-          break
-          case "C":
-            producto = prompt( "Excelente puedes elegir: \n 1- Portillo $7.000\n 2- Aguma $6.000\n 3- LasMoras $5.000 \n Indique el indice que quiere seleccionar")
-            switch(producto){
-
-              case "1":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-
-                alert(" Has elejido: " +cantidad+ " unidades de Sauvignon Blanc Portillo"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Sauvignon Blanc Portillo")
-                  precios.push(7000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "2":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Sauvignon Blanc Aguma"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Sauvignon Blanc Aguma")
-                  precios.push(6000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "3":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Savignon Blanc LasMoras"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Sauvignon Blanc LasMoras")
-                  precios.push(5000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break  
-            }
-
-          break
-          default:  
-            alert("La opción de vinos elegida no es correcta!")     
-        }  
-    }
-    else if (genero == "Cervezas"){
-      let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n A- Rubia\n B- Roja\n C- Negra \n Indique el indice que quiere seleccionar")
-
-      switch(familiaProducto){
-
-        case "A": 
-            
-          producto = prompt( "Excelente puedes elegir: \n 1- Corona $3.000\n 2- Heineken $2.000\n 3- Budweiser $1.000 \n Indique el indice que quiere seleccionar")
-          switch(producto){
-
-              case "1":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Corona Rubia"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Quilmes Rubia")
-                  precios.push(3000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "2":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Budweiser Rubia"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Budweiser Rubia")
-                  precios.push(2000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "3":
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Heineken Rubia"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Heineken Rubia")
-                  precios.push(1000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break  
-            }
-          break
-          case "B":
-
-            producto = prompt( "Excelente puedes elegir: \n 1- Imperial $3.000\n 2- Andes $2.000\n 3- Quilmes $1.000 \n Indique el indice que quiere seleccionar")
-            switch(producto){
-
-              case "1":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Imperial Roja"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Imperial Roja")
-                  precios.push(3000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "2":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Andes Roja"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Andes Roja")
-                  precios.push(2000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "3":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Quilmes Roja"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Quilmes Roja")
-                  precios.push(1000)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break  
-            }
-
-          break
-          case "C":
-            producto = prompt( "Excelente puedes elegir: \n 1- Imprerial $3.500\n 2- Andes $2.000\n 3- Quilmes $1.500 \n Indique el indice que quiere seleccionar")
-            switch(producto){
-
-              case "1":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Imperial IPA"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Imperial IPA")
-                  precios.push(3500)
-                }
-                console.log(carrito)
-                console.log(precios)
-                break
-
-              case "2":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Andes IPA"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Andes IPA")
-                  precios.push(2000)
-                }
-                console.log(carrito)
-                console.log(precios)
-
-                break
-
-              case "3":
-
-                cantidad =  prompt("Que cantidad quieres comprar?")
-                alert(" Has elejido: " +cantidad+ " unidades de Quilmes IPA"  )
-                for(let i = 0; i < cantidad; i++){
-                  carrito.push("Quilmes IPA")
-                  precios.push(1500)
-                }
-                console.log(carrito)
-                console.log(precios)
-
-                break  
-            }
-
-          break
-          default:  
-            alert("La opción de vinos elegida no es correcta!")     
-        }  
-    }
-    else if(genero == "Whiskies"){
-      let familiaProducto = prompt("De acuerdo, podemos ofrecerle: \n 1- Jim Bean  $12.000\n 2- Jack Daniels  $9.000\n 3- Johnnie Walker  $23.000\n 4- Jameson  $15.000 \n Indique el indice que quiere seleccionar")
-
-      switch(familiaProducto){
-
-        case "1": 
-            
-          cantidad =  prompt("Que cantidad quieres comprar?")
-          alert(" Has elejido: " +cantidad+ " unidades de Jin Bean"  )
-          for(let i = 0; i < cantidad; i++){
-            carrito.push("Jin Bean")
-            precios.push(12000)
-          }
-          console.log(carrito)
-          console.log(precios)
-          break
-
-        case "2":
-
-          cantidad =  prompt("Que cantidad quieres comprar?")
-          alert(" Has elejido: " +cantidad+ " unidades de Jack Daniels"  )
-          for(let i = 0; i < cantidad; i++){
-            carrito.push("Jack Daniels")
-            precios.push(9000)
-          }
-          console.log(carrito)
-          console.log(precios)
-          break
-
-        case "3":
+  let i = 0
+  //por cada vino lo muestro en pantalla
+  Vinos.forEach((vinos)=>{   
         
-          cantidad =  prompt("Que cantidad quieres comprar?")
-          alert(" Has elejido: " +cantidad+ " unidades de Johnnie Walker"  )
-          for(let i = 0; i < cantidad; i++){
-          carrito.push("Johnnie Walker")
-          precios.push(23000)
-        }
-        console.log(carrito)
-        console.log(precios)
-
-          break
-
-        case "4":
-          cantidad =  prompt("Que cantidad quieres comprar?")
-          alert(" Has elejido: " +cantidad+ " unidades de Jameson"  )
-          for(let i = 0; i < cantidad; i++){
-            carrito.push("Jameson")
-            precios.push(15000)
-          }
-          console.log(carrito)
-          console.log(precios)
-
-          break   
-
-        default:  
-          alert("La opción de vinos elegida no es correcta!")     
-        }  
-    }
-    else if (genero == null){
-      alert("No has seleccionado ninguna opción")
-    }
-    else{
-        alert("La opción elegida no es correcta!")
-      
-    }
-    compra = confirm("Quiere seguir comprando")
-    if(compra){
-      genero = prompt("Vinos - Cervezas - Whiskies")
-    }
-    else{  
-      if(carrito.length != 0){
-        alert("Su carrito: \n" +carrito.join("\n")) 
-        sumaSaldo()
-        alert("Su saldo a pagar es de: " +saldo)
-
-        let aux = 1
-        for(let i = 0; i < carrito.length; i++ ){
-          carritoAux.push(aux+ "-" +carrito[i] )
-          aux ++
-        }
-        
-        //Seccion finalizar compra
-
-        let opcionCompra = prompt("Que desea hacer: \n Confirma - Elimina - Cancela")
-        let flag = true
-        
-        while(flag){  
-    
-          if(opcionCompra == "Confirma"){
-            alert("Saldo a pagar es de: $" +saldo)
-            flag = false
+        articulosVinos.innerHTML += `
+          <div class = "contenedorArticulos">
+          <h3>${vinos.tipo}</h3>
+          <p>${vinos.marca}</p>
+          <p>${vinos.variedad}</p>
+          <p>$ ${vinos.precio}</p>
+          <img src=${vinos.imagen} alt=""/>
+          <button id="${i}" class="botonComprar">Comprar</button>
+          </div>
+          `
+          i ++
           
-          }
-          else if( opcionCompra == "Elimina"){
-            
-            let itemBorrar = prompt("Seleccion el item que quiera eliminar:  \n" +carritoAux.join("\n"))
-            itemBorrar = itemBorrar - 1
-            console.log("Indice a eliminar: \n" +itemBorrar)
-            if(itemBorrar <= carritoAux.length){
-              
-              alert("Se eliminó el item: \n" +carrito[itemBorrar])
-              carrito.splice(itemBorrar,1)
-              precios.splice(itemBorrar,1)
-              carritoAux.splice(itemBorrar,1)
-              
-              sumaSaldo()
-              alert("Su carrito: \n" +carrito.join("\n ")+  "\n \n Su saldo a pagar es de: " +saldo) 
-                                        
-            }
-            else{
-              prompt("Esa opción no es valida!")
-            }
-            opcionCompra = prompt("Que desea hacer: \n Confirma - Elimina - Cancela")
-            //flag = false  
-            
-          }
-          //Cancela
-          else if(opcionCompra == "Cancela"){
-            elementosRemovidos = carrito.splice(0, carrito.length);
-            carritoAux.splice(0, carritoAux.length)
-            console.log("Elementos eliminados: \n" +elementosRemovidos);
-            console.log(carrito);
-            alert("Su carrito a sido eliminado.")
-            flag = false
-
-          }
-          else{
-            opcionCompra = prompt("Opción Incorrecta \n Que desea hacer: \n Confirma - Elimina - Cancela")
-          }  
-        }  
-        alert("Gracias vuelva prontos!")
-      }  
-      else{
-        alert("Gracias vuelva prontos!")
-        compra = false
-      }
+  }) 
   
-    }
+  const botonComprar = (e) => {   
+   
+    // console.log("Muestro el objeto selecionado por consola")
+    // console.log(Vinos[e.target.id])
+    let elementoSelecionado = Vinos[e.target.id]
+
+    //almaceno lo selecionado en el carrito
+    carritoCompra.push(elementoSelecionado)
+
+    //transformo el carrito en string para almacenarlo en el local storage
+    jsonCarrito = JSON.stringify(carritoCompra)
+    localStorage.setItem('carritoBebidas', jsonCarrito)
+    // console.log("Carrito Json " +jsonCarrito)
+  }
+
+  //por cada click en boton Comprar ejecuto la función 
+  const buttons = document.getElementsByClassName("botonComprar");
+  for (let button of buttons) {
+    button.addEventListener("click", botonComprar);
+  }  
+
+}
+
+
+const mostrarCerveza = (cervezas)=>{ 
+  articulosVinos.innerHTML = ""
+  articulosWhiskies.innerHTML = ""
+  articulosCervezas.innerHTML = ""
+  articulosCarrito.innerHTML = ""
+
+  let i = 0
+  Cerveza.forEach((cervezas)=>{   
+
+       articulosCervezas.innerHTML += `
+         <div class = "contenedorArticulos">
+         <h3>${cervezas.tipo}</h3>
+         <p>${cervezas.marca}</p>
+         <p>${cervezas.variedad}</p>
+         <p>$ ${cervezas.precio}</p>
+         <img src=${cervezas.imagen} alt=""/>
+         <button id="${i}" class="botonComprar">Comprar</button>         
+         </div>
+         `
+        i ++  
+  })
+
+  const botonComprar = (e) => {
+
+    let elementoSelecionado = Cerveza[e.target.id]
+    carritoCompra.push(elementoSelecionado)
+    jsonCarrito = JSON.stringify(carritoCompra)
+    localStorage.setItem('carritoBebidas', jsonCarrito)
 
   }
 
+  const buttons = document.getElementsByClassName("botonComprar");   
+  for (let button of buttons) {
+    button.addEventListener("click", botonComprar);
+  }  
 }
 
-else{
-  alert("Gracias vuelva prontos!")
+const mostrarWhiskie = (whiskies)=>{ 
+  articulosVinos.innerHTML = ""
+  articulosCervezas.innerHTML = ""
+  articulosWhiskies.innerHTML = ""
+  articulosCarrito.innerHTML = ""
+
+  let i = 0
+  Whiskie.forEach((whiskies)=>{   
+
+    articulosWhiskies.innerHTML += `
+      <div class = "contenedorArticulos">
+      <h3>${whiskies.tipo}</h3>
+      <p>${whiskies.marca}</p>
+      <p>$ ${whiskies.precio}</p>
+      <img src=${whiskies.imagen} alt=""/>
+      <button id="${i}" class="botonComprar">Comprar</button>
+      </div>
+      `
+      i ++
+  })
+
+  const botonComprar = (e) => {
+
+    let elementoSelecionado = Whiskie[e.target.id]
+    carritoCompra.push(elementoSelecionado)
+    jsonCarrito = JSON.stringify(carritoCompra)
+    localStorage.setItem('carritoBebidas', jsonCarrito)
+
+  }
+
+  const buttons = document.getElementsByClassName("botonComprar");  
+  for (let button of buttons) {
+    button.addEventListener("click", botonComprar);
+  }
 }
+
+//funcion boton Carrito
+const finalizarCompra = (carrito)=>{
+  articulosVinos.innerHTML = ""
+  articulosCervezas.innerHTML = ""
+  articulosWhiskies.innerHTML = ""
+  articulosCarrito.innerHTML = ""
+  
+  //convierto en array el carrito almacenado en el local
+  let arrayCarrito = JSON.parse(jsonCarrito)
+
+  console.log("Carrito Json" +jsonCarrito)
+  console.log(arrayCarrito)
+
+  let i = 0
+  saldo = 0
+  //muestro los articulos del carrito por pantalla
+  arrayCarrito.forEach((carrito)=>{
+    articulosCarrito.innerHTML += `
+      <div class = "listaCarrito">
+      <img src=${carrito.imagen} alt=""/>
+      <button id="${i}" class="botonEliminar">Eliminar</button>
+      </div>
+      `
+      i++  
+    saldo = saldo + parseInt(carrito.precio)  
+    
+  }) 
+  //muestro el saldo por pantalla
+  saldoCarrito.innerHTML = `
+    <div class = "saldo">
+    <p>Su saldo a pagar es $ ${saldo} </p>
+    </div>
+    `
+
+  const botonEliminar = (e) => {
+    //vacio para no repetir pantalla
+    articulosCarrito.innerHTML = ""
+
+    //eliminamos el elemento del carrito
+    arrayCarrito.splice(e.target.id,1)
+    carritoCompra.splice(e.target.id,1)
+
+    jsonCarrito = JSON.stringify(carritoCompra)
+    localStorage.setItem('carritoBebidas', jsonCarrito)
+
+    let i = 0
+    saldo = 0
+    arrayCarrito.forEach((carrito)=>{
+      articulosCarrito.innerHTML += `
+        <div class = "listaCarrito">
+        <img src=${carrito.imagen} alt=""/>
+        <button id="${i}" class="botonEliminar">Eliminar</button>
+        </div>
+        `
+        i++  
+        saldo = saldo + parseInt(carrito.precio)  
+      
+    })
+    const buttons = document.getElementsByClassName("botonEliminar");  
+    for (let button of buttons) {
+      button.addEventListener("click", botonEliminar);
+    }
+    saldoCarrito.innerHTML = `
+      <div class = "saldo">
+      <p>Su saldo a pagar es $ ${saldo}</p>
+      </div>
+      `
+  }
+
+  const buttons = document.getElementsByClassName("botonEliminar");  
+  for (let button of buttons) {
+    button.addEventListener("click", botonEliminar);
+
+  }
+}
+
+const eliminarCompra = (carrito)=>{
+  console.log(carritoCompra)
+  if(carritoCompra){
+    articulosVinos.innerHTML = ""
+    articulosCervezas.innerHTML = ""
+    articulosWhiskies.innerHTML = ""
+    articulosCarrito.innerHTML = ""
+    saldoCarrito.innerHTML = ""
+
+    //vaciamos carrito
+    carritoCompra.length = 0 
+    console.log(carritoCompra)
+    jsonCarrito = JSON.stringify(carritoCompra)
+    localStorage.setItem('carritoBebidas', jsonCarrito)
+    
+    console.log(jsonCarrito)
+    saldoCarrito.innerHTML = `
+      <div class = "saldo">
+      <p>No tiene nada en su carrito</p>
+      <p>Gracias vuelva prontos!</p>
+      </div>
+      `
+     saldo = 0
+     console.log(saldo) 
+     console.log(carritoCompra)
+  }
+  else{
+    saldoCarrito.innerHTML = `
+    <div class = "saldo">
+    <p>No tiene nada en su carrito</p>
+    </div>
+    `    
+  }
+}
+
+const botonVino = document.getElementById("botonVino")
+botonVino.addEventListener("click", mostrarVinos)
+
+const botonCerveza = document.getElementById("botonCerveza")
+botonCerveza.addEventListener("click", mostrarCerveza)
+
+const botonWhiskie = document.getElementById("botonWhiskie")
+botonWhiskie.addEventListener("click", mostrarWhiskie)
+
+const botonCarrito = document.getElementById("botonCarrito")
+botonCarrito.addEventListener("click", finalizarCompra)
+
+const botonVaciar = document.getElementById("botonVaciar")
+botonVaciar.addEventListener("click", eliminarCompra)
+
+  // const body = document.querySelector("body")
+
+  // if(JSON.parse(localStorage.getItem("dark"))){
+  //     localStorage.setItem("dark", false)
+  //     body.classList.toggle("bodyDark")
+  // }else{
+  //     localStorage.setItem("dark", true)
+  //     body.classList.toggle("bodyDark")
+  // }
+  
+//})  
+
+// ----------------------------------------------------------------------//
+
+// class Noticia {
+//   constructor(titulo, contenido, autor, imagen, categoria) {
+//       this.titulo = titulo;
+//       this.contenido = contenido;
+//       this.autor = autor;
+//       this.imagen = imagen;
+//       this.categoria = categoria; 
+//   }
+
+
+// }
+
+// const contenedorMayor = document.getElementById("Container-Main")
+
+// const Noticias = [
+//   new Noticia("Julian Alvarez marca 10 goles en un solo partido y establece un nuevo récord mundial", "El joven jugador argentino del River Plate deja boquiabiertos a los aficionados al marcar 10 goles en un solo partido, superando cualquier récord previo en la historia del fútbol.", "Juan Pérez", "https://media.ambito.com/p/9198118c25e325c23f37aa20b8ec4d2b/adjuntos/239/imagenes/040/575/0040575606/julian-alvarez-manchester-cityjpg.jpg", "futbol"),
+//   new Noticia("Científicos descubren un nuevo dispositivo de realidad virtual que permite a los usuarios viajar en el tiempo", "Un equipo de investigadores ha desarrollado un dispositivo de realidad virtual revolucionario que transporta a los usuarios a cualquier momento histórico, desde la era de los dinosaurios hasta el futuro distante.", "María González", "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2X3RPOITNFEF7PWMT6KHLBXXLQ.jpg", "tecnologia"),
+//   new Noticia("Nueva entrega de Pokémon presenta a Cristiano Ronaldo como entrenador maestro", "La última entrega de la serie Pokémon sorprende a los fans al incluir a Cristiano Ronaldo como un legendario entrenador Pokémon, desafiando a los jugadores a derrotarlo en una batalla épica.", "Carlos Martínez", "https://www.comboinfinito.com.br/principal/wp-content/uploads/2016/07/pokemon-go-cristiano-ronaldo.jpg", "pokemon"),
+//   new Noticia("Científicos logran clonar dinosaurios y planean abrir un parque temático", "Un grupo de científicos ha logrado un avance sin precedentes al clonar dinosaurios extintos y planean abrir un parque temático donde los visitantes podrán ver a estas criaturas prehistóricas en vivo.", "Laura Sánchez", "https://www.tecnopolis.gob.ar/wp-content/uploads/2020/07/10257688304_c30ca75b22_k-1920x1280.jpg", "tecnologia"),
+//   new Noticia("Angelina Jolie firma un contrato histórico para protagonizar diez películas de acción consecutivas", "La reconocida actriz Angelina Jolie ha firmado un contrato sin precedentes para protagonizar una serie de diez películas de acción consecutivas, cada una con presupuestos multimillonarios y efectos especiales de vanguardia.", "Diego López", "https://elcomercio.pe/resizer/vdbOdd_3jlemp3cGpnx22jP0XrE=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/G2IXZTKL5JFVZO32GQPWSG42JI.jpg", "extra"),
+//   new Noticia("Elon Musk revela su último proyecto: colonizar Marte en solo un año", "El empresario multimillonario Elon Musk ha anunciado su plan más ambicioso hasta la fecha: colonizar Marte en solo un año mediante el lanzamiento masivo de naves espaciales tripuladas.", "Andrés López", "https://www.infobae.com/new-resizer/etQPCpX3l-qnCkSfA1YSM9ejqEg=/arc-anglerfish-arc2-prod-infobae/public/26DJ6CSJAFAXJHJK2K25GL7JCM.webp", "tecnologia"),
+//   new Noticia("Roger Federer gana el Abierto de Australia sin perder un solo set", "El tenista suizo Roger Federer ha logrado una hazaña extraordinaria al ganar el Abierto de Australia sin perder un solo set en todo el torneo, demostrando su dominio indiscutible en la cancha.", "Andrés López", "https://media.gq.com.mx/photos/60e5c12d433a17b371256efd/16:9/w_2560%2Cc_limit/GettyImages-1322028403.jpg", "deportes"),
+//   new Noticia("Apple lanza un iPhone que puede teletransportar a los usuarios a cualquier parte del mundo", "La empresa tecnológica Apple ha presentado su último lanzamiento: un iPhone con la capacidad de teletransportar a los usuarios a cualquier ubicación del mundo con solo tocar la pantalla.", "Elena Martínez", "https://www.clarin.com/2023/06/20/6X-0J7sxO_720x0__1.jpg", "tecnologia"),
+//   new Noticia("Científicos descubren una nueva forma de vida extraterrestre en la Luna", "Un equipo de científicos ha hecho un descubrimiento impactante al encontrar evidencia de una forma de vida extraterrestre en la Luna, desencadenando un debate global sobre el origen y la naturaleza de esta misteriosa entidad.", "Roberto Soto", "https://images.ecestaticos.com/_wAYz7t3O_YxeegZ5k3HC1YpoZA=/0x0:2121x1414/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fb99%2F108%2F9cd%2Fb991089cde559490dd6f5df5b9645de9.jpg", "extra"),
+//   new Noticia("Lady Gaga anuncia su próxima gira mundial que incluirá conciertos en la Luna y Marte", "La superestrella del pop Lady Gaga ha dejado a sus fans emocionados al anunciar su próxima gira mundial, que incluirá conciertos en la Luna y Marte, marcando un hito histórico en la industria del entretenimiento.", "María Fernández", "https://e.rpp-noticias.io/xlarge/2018/08/31/270627_670677.jpg", "extra")
+// ];
+
+// let estaEnElLocal = JSON.parse(localStorage.getItem("dark"))
+
+
+// if(estaEnElLocal){
+//   const body = document.querySelector("body")
+
+//   body.classList.add("bodyDark")
+// }
+
+// const montarLasNoticias = (noticia)=>{ 
+
+//   contenedorMayor.innerHTML += `
+//   <div class="card">
+//       <h3>${noticia.titulo}</h3>
+//       <p>${noticia.contenido}</p>
+//       <p>${noticia.autor}</p>
+//       <img src=${noticia.imagen} alt=""/>
+//   </div>
+//   `
+// }
+
+
+// Noticias.forEach((noticia)=>{
+//   montarLasNoticias(noticia)
+// })
+
+// const listaDeCategorias = document.getElementsByClassName("list")
+// const ArrayDeListaDeCategoria = Array.from(listaDeCategorias)
+
+
+// ArrayDeListaDeCategoria.forEach(list=>{
+//   list.addEventListener("click", (e)=>{
+//       let categoria = e.target.innerText
+
+//       const NoticiasFiltradas = Noticias.filter((noticia)=>{
+//           return noticia.categoria.toUpperCase() == categoria.toUpperCase()
+//       })
+
+//       contenedorMayor.innerHTML = ""
+
+//       NoticiasFiltradas.forEach((noticia)=>{
+//           montarLasNoticias(noticia)
+//       })
+//   })
+// })
+
+
+// const botonDark = document.getElementById("botonDark")
+
+// botonDark.addEventListener("click", ()=>{
+
+//   const body = document.querySelector("body")
+
+//   if(JSON.parse(localStorage.getItem("dark"))){
+//       localStorage.setItem("dark", false)
+//       body.classList.toggle("bodyDark")
+//   }else{
+//       localStorage.setItem("dark", true)
+//       body.classList.toggle("bodyDark")
+//   }
+  
+// })

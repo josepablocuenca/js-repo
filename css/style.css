@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+
+:root{
+    --color-primario-claro: #E3FEF7;
+    --color-secundario-claro: #cab0f3;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+   
+    background-color: var(--color-secundario-claro);
+    color: var(--color-primario-oscuro);
+    height: 100%;
+}
+
+.Encabezado{
+    padding: 10px 0;
+    text-align: center;
+    color: black;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Encabezado h1 {
+    font-size: 4rem;
+}
+
+.Encabezado h3 {
+    padding-left: 200px;
+}
+
+.contenedorArticulos{
+    display: flex;
+    /* flex-direction:row; */
+    justify-content: space-between;
+    align-items: center;
+  
+}
+
+.Container-Main{
+    /* grid-area: main; */
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+.contenedorListado{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* gap: 20px; */
+    padding: 20px;
+}
+.contenedorArticulos{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.botonElemento{
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(158, 18, 158);
+    color: white;
+}
+.carrito{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.botonCarrito, .botonVaciar{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(158, 18, 158);
+    color: white;
+}
+.botonEliminar, .botonComprar{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(126, 101, 126);
+    color: white;
+}
+
+.contenedorArticulos img{
+    width:  80px;
+    height: 80px;
+
+}
+.listaVinos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    position: fixed;
+    top: 380px;
+    left: 750px;
+    /* background-color: white; */
+}
+.listaCarrito{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+.listaCarrito img{
+    width: 80px;
+    height: 80px;
+}
+.saldo{
+    margin-bottom: 10%;
+}
+.saldo p{
+    font-size: 25px;
+}

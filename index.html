@@ -3,11 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Bebidas Shopping</title>
 </head>
 <body>
+    <header class="Encabezado">
+        <h1>Coder Drink Shopping</h1>
+        <h3>Compra desde tu casa!</h3>
+    </header>
 
-    <!-- script de js siempre al final o al comienzo con defer o -->
-    <script src="./js/main.js"></script>
+
+
+    <div class="Container-Mayor">
+        <main>
+        <div id="Container-Main" class="Container-Main">
+            <div>    
+                <button id="botonVino" class="botonElemento">Vinos</button>         
+                <button id="botonCerveza" class="botonElemento">Cervezas</button>
+                <button id="botonWhiskie" class="botonElemento">Whiskies</button>
+            </div>
+        </div>
+        <div class="contenedorListado">
+            <div id="listaVinos" class="listaArticulos"></div>
+            <div id="listaCervezas" class="listaArticulos"></div>
+            <div id="listaWhiskies" class="listaArticulos"></div>
+            <div id="listaCarrito" class="listaCarrito"></div>
+            <div id="saldoCarrito" class="saldoCarrito"></div>    
+            <button id="botonCarrito" class="botonCarrito">Carrito</button>
+            <button id="botonVaciar" class="botonVaciar">Vaciar</button>
+        </div> 
+           
+        </main>
+
+    </div>
 </body>
+<script src="js/main.js"></script>
 </html>
