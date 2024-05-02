@@ -20,6 +20,7 @@
     <div class="Container-Mayor">
         <main>
         <div id="Container-Main" class="Container-Main">
+            <div id="carrito" class="carrito"></div>
             <div>    
                 <button id="botonVino" class="botonElemento">Vinos</button>         
                 <button id="botonCerveza" class="botonElemento">Cervezas</button>
@@ -27,18 +28,21 @@
             </div>
         </div>
         <div class="contenedorListado">
-            <div id="listaVinos" class="listaArticulos"></div>
-            <div id="listaCervezas" class="listaArticulos"></div>
-            <div id="listaWhiskies" class="listaArticulos"></div>
-            <div id="listaCarrito" class="listaCarrito"></div>
+            <div id="listaArticulos" class="listaArticulos"></div>
+            <div id="tituloCarrito" class="tituloCarrito"></div>
+            <div id="articulosCarrito" class="articulosCarrito"></div> 
+            <button id="botonCarrito" class="botonCarrito"><img src="https://cdn-icons-png.flaticon.com/128/3144/3144456.png"></button>
             <div id="saldoCarrito" class="saldoCarrito"></div>    
-            <button id="botonCarrito" class="botonCarrito">Carrito</button>
-            <button id="botonVaciar" class="botonVaciar">Vaciar</button>
+            <div id="botonesCarrito" class="botonesCarrito">
+                <div id="botonConfirmar" class="botonConfirmar"></div>
+                <div id="botonVaciar" class="botonVaciar"></div>
+            </div>    
         </div> 
            
         </main>
 
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="./js/main.js"></script>
 </html>

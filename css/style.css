@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 
 :root{
@@ -11,7 +11,7 @@
 
 body{
     font-family: 'Roboto', sans-serif;
-   
+
     background-color: var(--color-secundario-claro);
     color: var(--color-primario-oscuro);
     height: 100%;
@@ -38,7 +38,7 @@ body{
     /* flex-direction:row; */
     justify-content: space-between;
     align-items: center;
-  
+
 }
 
 .Container-Main{
@@ -58,12 +58,26 @@ body{
     /* gap: 20px; */
     padding: 20px;
 }
-.contenedorArticulos{
+.listaArticulos{
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    /* gap: 20px; */
+    padding: 20px;
+}
+.contenedorArticulos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    height: 450px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background-color: #d4d4d4;
     padding: 20px;
 }
 
@@ -74,21 +88,28 @@ body{
     background-color: rgb(158, 18, 158);
     color: white;
 }
-.carrito{
+
+.botonCarrito{
+    position: absolute;
+    top: 130px;
+    right: 50px;
+    background-color: #ffffff;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
-    align-content: center;
     justify-content: center;
+    align-items: center;
 }
-.botonCarrito, .botonVaciar{
+.botonCarrito img{
+    width: 60px;
+}
+
+.botonesCarrito{
     display: flex;
     flex-direction: row;
-    font-size: 1.5rem;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: rgb(158, 18, 158);
-    color: white;
 }
-.botonEliminar, .botonComprar{
+.botonComprar, .botonEliminar, .eliminarCarrito, .confirmarCarrito{
     display: flex;
     flex-direction: row;
     font-size: 1.2rem;
@@ -103,17 +124,6 @@ body{
     height: 80px;
 
 }
-.listaVinos{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    position: fixed;
-    top: 380px;
-    left: 750px;
-    /* background-color: white; */
-}
 .listaCarrito{
     display: flex;
     /* flex-direction: column; */
@@ -125,6 +135,19 @@ body{
 .listaCarrito img{
     width: 80px;
     height: 80px;
+}
+.articulosCarrito{
+    display: flex;
+    flex-direction: row;
+    justify-content: inherit;
+    align-items: center;
+    width: 1400px;
+    height: 450px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    /* position: relative; */
+    /* padding: 20px; */
 }
 .saldo{
     margin-bottom: 10%;
