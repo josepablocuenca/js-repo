@@ -108,8 +108,19 @@ body{
 .botonesCarrito{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    width: 280px;
 }
-.botonComprar, .botonEliminar, .eliminarCarrito, .confirmarCarrito{
+.eliminarCompra, .confirmarCompra{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.4rem;
+    padding: 1px;
+    border-radius: 10px;
+    background-color: rgb(185, 61, 235);
+    color: white;
+}
+.botonComprar, .botonEliminar{
     display: flex;
     flex-direction: row;
     font-size: 1.2rem;

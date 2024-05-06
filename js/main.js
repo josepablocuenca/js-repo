@@ -1,6 +1,10 @@
 //defino variables
 const articulos = document.getElementById("listaArticulos")
 const saldoCarrito = document.getElementById("saldoCarrito")
+const tituloCarrito = document.getElementById("tituloCarrito")
+const botonConfirmar = document.getElementById("botonConfirmar")
+const botonVaciar = document.getElementById("botonVaciar")
+const articulosCarrito = document.getElementById("articulosCarrito")
 
 const arreglo = []
 let saldo = 0
@@ -41,6 +45,7 @@ const llamarPorArticulo = async (data, tipo) =>{
       
       //almaceno lo selecionado en el carrito 
       //analizo si ya existe ese articulo y suma cantidad
+
       if(articuloExistente) {
         articuloExistente.cantidad++ 
       }
@@ -88,6 +93,7 @@ const llamarPorArticulo = async (data, tipo) =>{
 function mostrarCarrito(){
   articulos.innerHTML = ""
   articulosCarrito.innerHTML = ""
+  
   if (carritoCompra.length != 0){
     tituloCarrito.innerHTML = "<h1>Su Carrito: </h1>"
     let i = 0
@@ -122,15 +128,16 @@ function mostrarCarrito(){
       button.addEventListener("click", eliminarArticulo)
     }     
 
-    botonConfirmar.innerHTML = "<button id='confirmarCarrito' class='confirmarCarrito'>Confirmar</button> " 
-    confirmarCarrito = document.getElementById("botonConfirmar")
-    confirmarCarrito.addEventListener("click", confirmarCompra)
-        
-    botonVaciar.innerHTML = "<button id='eliminarCarrito' class='eliminarCarrito'>Vaciar</button> " 
-    eliminarCarrtito = document.getElementById("botonVaciar")
-    eliminarCarrtito.addEventListener("click", eliminarCompra)
-
-  }
+    //muestro los botones de Confirmar y Eliminar compra
+    botonConfirmar.innerHTML = "<button id='confirmarCompra' class='confirmarCompra'>Confirmar</button> " 
+    const botonC = document.getElementById("confirmarCompra")
+    botonC.addEventListener("click", confirmarCompra)
+      
+    botonVaciar.innerHTML = "<button id='eliminarCompra' class='eliminarCompra'>Vaciar</button> " 
+    const botonV = document.getElementById("botonVaciar")
+    botonV.addEventListener("click", eliminarCompra)
+  
+  }  
   else{
     Swal.fire({
       title: "Ud no tiene nada en su carrito!",
@@ -139,7 +146,9 @@ function mostrarCarrito(){
       confirmButtonText: "Ok"
     })
   }
+
 }
+//funcion eliminar por articulo
 const eliminarArticulo = (e)=>{
   articulos.innerHTML = ""
   articulosCarrito.innerHTML = ""
@@ -176,7 +185,9 @@ const eliminarArticulo = (e)=>{
      articulos.innerHTML = "" 
      articulosCarrito.innerHTML = ""
      tituloCarrito.innerHTML = ""
-     botonesCarrito.innerHTML = ""
+     botonConfirmar.innerHTML = ""
+     botonVaciar.innerHTML = ""
+    
   }
   
   const buttons = document.getElementsByClassName("botonEliminar");
@@ -185,6 +196,7 @@ const eliminarArticulo = (e)=>{
   }  
   
 }
+//funcion Eliminar total compra
 const eliminarCompra = ()=>{
 
   if(carritoCompra.length != 0){
@@ -192,6 +204,7 @@ const eliminarCompra = ()=>{
     articulosCarrito.innerHTML = ""
     saldoCarrito.innerHTML = ""
     tituloCarrito.innerHTML = ""
+   
     //vaciamos carrito
     carritoCompra.length = 0 
     console.log(carritoCompra)
@@ -206,7 +219,9 @@ const eliminarCompra = ()=>{
       confirmButtonText: "Ok"
     })
     articulosCarrito.innerHTML = ""
-     saldo = 0
+    saldo = 0
+    botonConfirmar.innerHTML = ""
+    botonVaciar.innerHTML = ""
   }
   else{
     Swal.fire({
@@ -217,13 +232,14 @@ const eliminarCompra = ()=>{
     })
   }
 }
+
+//funcion Confirmamos Compra
 const confirmarCompra = ()=>{
   articulosCarrito.innerHTML = ""
   articulos.innerHTML = ""
   articulosCarrito.innerHTML = ""
   saldoCarrito.innerHTML = ""
-  botonVaciar.innerHTML = ""
-  botonConfirmar.innerHTML = ""
+  tituloCarrito.innerHTML = ""
 
   //vaciamos carrito
   carritoCompra.length = 0 
@@ -233,6 +249,8 @@ const confirmarCompra = ()=>{
   
   console.log(jsonCarrito)
   saldo = 0
+  botonConfirmar.innerHTML = ""
+  botonVaciar.innerHTML = ""
 
   Swal.fire({
     title: "Felicitaciones!",
@@ -240,6 +258,7 @@ const confirmarCompra = ()=>{
     icon: "success",
     confirmButtonText: "Ok"
   })
+
 }
 
 
@@ -288,7 +307,6 @@ llamarApi()
 
 const botonCarrito = document.getElementById("botonCarrito")
 botonCarrito.addEventListener("click", () => {
-  botonCarrito.classList.toggle('active')
   mostrarCarrito()
 });
   
